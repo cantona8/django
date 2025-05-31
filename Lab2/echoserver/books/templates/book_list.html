@@ -1,0 +1,25 @@
+<h1>Каталог книг</h1>
+
+<a href="{% url 'book_create' %}">Добавить новый элемент</a>
+<ul>
+  {% for book in page_obj %}
+    <li>
+      <strong>{{ book.name }}</strong> — {{ book.author }}, {{ book.price }}
+      [<a href="{% url 'book_update' book.pk %}">Изменить</a>]
+      [<a href="{% url 'book_delete' book.pk %}">Удалить</a>]
+    </li>
+  {% endfor %}
+</ul>
+
+<div>
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">‹ предыдущая</a>
+    {% endif %}
+  
+    <span>страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+  
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">следующая ›</a>
+    {% endif %}
+  </div>
+  
